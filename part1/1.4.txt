@@ -1,0 +1,33 @@
+$ docker run -d devopsdockeruh/exec_bash_exercise
+Unable to find image 'devopsdockeruh/exec_bash_exercise:latest' locally
+latest: Pulling from devopsdockeruh/exec_bash_exercise
+1c6172af85ee: Pull complete
+b194b0e3c928: Pull complete
+1f5ec00f35d5: Pull complete
+93b1353672b6: Pull complete
+3d7f38db3cca: Pull complete
+21e102f9fe89: Pull complete
+d851ffed797c: Pull complete
+a45031e28c68: Pull complete
+ca3c1414856f: Pull complete
+02c74c9936fd: Pull complete
+ddb55f8ab0a8: Pull complete
+Digest: sha256:d38b6f6b0eed2880e25c9eb7f83f1cd016ffe3a56c9a3fec6e7bee480bf1ed0f
+Status: Downloaded newer image for devopsdockeruh/exec_bash_exercise:latest
+01ca704f17ccc9fcbbdb0dca0b10d282096d55fbf396023f54dd76ec83ec1023
+$ docker exec -it 01 bash
+root@01ca704f17cc:/usr/app# tail -f ./logs.txt
+Wed, 28 Oct 2020 12:27:59 GMT
+Wed, 28 Oct 2020 12:28:02 GMT
+Secret message is:
+"Docker is easy"
+Wed, 28 Oct 2020 12:28:08 GMT
+Wed, 28 Oct 2020 12:28:11 GMT
+Wed, 28 Oct 2020 12:28:14 GMT
+Wed, 28 Oct 2020 12:28:17 GMT
+Secret message is:
+"Docker is easy"
+Wed, 28 Oct 2020 12:28:23 GMT
+Wed, 28 Oct 2020 12:28:26 GMT
+^C
+root@01ca704f17cc:/usr/app# exit

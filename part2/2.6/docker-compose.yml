@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_PASSWORD=secret
+
+  redis:
+    image: redis:6
+
+  server:
+    build: ../2.3/server
+    ports:
+      - 8000:8000
+    environment:
+      - REDIS=redis
+      - DB_HOST=db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=secret
+    restart: unless-stopped
+    depends_on:
+      - db
+      - redis
+
+  client:
+    build: ../2.3/client
+    ports:
+      - 5000:5000

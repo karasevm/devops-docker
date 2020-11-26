@@ -1,0 +1,3 @@
+$ docker images | grep server-secure
+server-secure                          node         e29f6823aa07   4 minutes ago    132MB
+server-secure                          latest       c60713985646   19 hours ago     338MB

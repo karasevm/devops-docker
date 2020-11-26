@@ -1,0 +1,29 @@
+$ docker build -t curler .
+[+] Building 0.0s (0/2)
+[+] Building 0.4s (9/9) FINISHED
+ => [internal] load .dockerignore                                                                                  0.1s
+ => => transferring context: 2B                                                                                    0.0s
+ => [internal] load build definition from Dockerfile                                                               0.1s
+ => => transferring dockerfile: 37B                                                                                0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:16.04                                                    0.0s
+ => [1/4] FROM docker.io/library/ubuntu:16.04                                                                      0.0s
+ => [internal] load build context                                                                                  0.0s
+ => => transferring context: 141B                                                                                  0.0s
+ => CACHED [2/4] WORKDIR /mydir                                                                                    0.0s
+ => CACHED [3/4] RUN apt-get update && apt-get install -y curl                                                     0.0s
+ => [4/4] COPY curl-script.sh .                                                                                    0.1s
+ => exporting to image                                                                                             0.1s
+ => => exporting layers                                                                                            0.1s
+ => => writing image sha256:2cebf3fe32a60e4a50df6c1d3d06182d19669cfcdb572402623119aba093b36a                       0.0s
+ => => naming to docker.io/library/curler                                                                          0.0s
+$ docker run -it curler
+Input website:
+helsinki.fi
+Searching..
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>301 Moved Permanently</title>
+</head><body>
+<h1>Moved Permanently</h1>
+<p>The document has moved <a href="http://www.helsinki.fi/">here</a>.</p>
+</body></html>

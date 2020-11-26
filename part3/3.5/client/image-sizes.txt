@@ -1,0 +1,3 @@
+$docker images | grep client-secure
+client-secure                          node         e8209c345e0e   2 minutes ago    330MB
+client-secure                          latest       1f1aa448d053   42 minutes ago   532MB

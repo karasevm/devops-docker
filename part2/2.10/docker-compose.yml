@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - ./database:/var/lib/postgresql/data
+
+  redis:
+    image: redis:6
+    volumes:
+      - ./redis:/data
+    command: redis-server --appendonly yes
+
+  server:
+    build: ../2.3/server
+    environment:
+      - REDIS=redis
+      - DB_HOST=db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=secret
+      - FRONT_URL=http://localhost
+    restart: unless-stopped
+    depends_on:
+      - db
+      - redis
+
+  client:
+    build: ../2.3/client
+    environment:
+      - API_URL=http://localhost/api
+
+  proxy:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    restart: unless-stopped
+    depends_on:
+      - server
+      - client

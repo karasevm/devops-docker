@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_PASSWORD=secret
+
+  redis:
+    image: redis:6
+
+  server:
+    build: ../2.3/server
+    environment:
+      - REDIS=redis
+      - DB_HOST=db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=secret
+    restart: unless-stopped
+    depends_on:
+      - db
+      - redis
+
+  client:
+    build: ../2.3/client
+
+  proxy:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    restart: unless-stopped
+    depends_on:
+      - server
+      - client

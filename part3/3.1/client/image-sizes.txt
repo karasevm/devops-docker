@@ -1,0 +1,44 @@
+#
+# Before
+#
+
+$ docker history nodetest-frontend
+IMAGE          CREATED       CREATED BY                                      SIZE      COMMENT
+cf959cc6823c   2 weeks ago   CMD ["/bin/sh" "-c" "npm start"]                0B        buildkit.dockerfile.v0
+<missing>      2 weeks ago   ENV API_URL=http://localhost:8000               0B        buildkit.dockerfile.v0
+<missing>      2 weeks ago   EXPOSE map[5000/tcp:{}]                         0B        buildkit.dockerfile.v0
+<missing>      2 weeks ago   RUN /bin/sh -c npm install # buildkit           212MB     buildkit.dockerfile.v0
+<missing>      2 weeks ago   RUN /bin/sh -c apt-get update && apt-get ins…   142MB     buildkit.dockerfile.v0
+<missing>      2 weeks ago   RUN /bin/sh -c curl -sL https://deb.nodesour…   33.6MB    buildkit.dockerfile.v0
+<missing>      2 weeks ago   RUN /bin/sh -c apt-get update && apt-get ins…   46.4MB    buildkit.dockerfile.v0
+<missing>      2 weeks ago   COPY ./frontend-example-docker-master /myapp…   557kB     buildkit.dockerfile.v0
+<missing>      2 weeks ago   WORKDIR /myapp                                  0B        buildkit.dockerfile.v0
+<missing>      2 weeks ago   /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
+<missing>      2 weeks ago   /bin/sh -c mkdir -p /run/systemd && echo 'do…   7B
+<missing>      2 weeks ago   /bin/sh -c rm -rf /var/lib/apt/lists/*          0B
+<missing>      2 weeks ago   /bin/sh -c set -xe   && echo '#!/bin/sh' > /…   745B
+<missing>      2 weeks ago   /bin/sh -c #(nop) ADD file:c1f3147c7b6710af5…   131MB
+
+$ docker images | grep nodetest-frontend
+nodetest-frontend                      latest       cf959cc6823c   2 weeks ago         565MB
+
+#
+# After
+#
+
+$ docker history nodetest-frontend
+IMAGE          CREATED             CREATED BY                                      SIZE      COMMENT
+3271494655ab   About an hour ago   CMD ["npm" "start"]                             0B        buildkit.dockerfile.v0
+<missing>      About an hour ago   ENV API_URL=http://localhost:8000               0B        buildkit.dockerfile.v0
+<missing>      About an hour ago   EXPOSE map[5000/tcp:{}]                         0B        buildkit.dockerfile.v0
+<missing>      About an hour ago   RUN /bin/sh -c apt-get update && apt-get ins…   400MB     buildkit.dockerfile.v0
+<missing>      About an hour ago   COPY ./frontend-example-docker-master /myapp…   557kB     buildkit.dockerfile.v0
+<missing>      2 weeks ago         WORKDIR /myapp                                  0B        buildkit.dockerfile.v0
+<missing>      2 weeks ago         /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
+<missing>      2 weeks ago         /bin/sh -c mkdir -p /run/systemd && echo 'do…   7B
+<missing>      2 weeks ago         /bin/sh -c rm -rf /var/lib/apt/lists/*          0B
+<missing>      2 weeks ago         /bin/sh -c set -xe   && echo '#!/bin/sh' > /…   745B
+<missing>      2 weeks ago         /bin/sh -c #(nop) ADD file:c1f3147c7b6710af5…   131MB
+
+$ docker images | grep nodetest-frontend
+nodetest-frontend                      latest       3271494655ab   About an hour ago   532MB
